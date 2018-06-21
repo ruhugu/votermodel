@@ -11,11 +11,11 @@ import votermodel as voter
 
 # Parameters
 # ====================
-nnodes = 20 #0
+nnodes = 200
 edges_per_node_BA = 2
 edges_per_node_WS = 4
 rewire_probs = np.array([0, 0.001, 0.01, 0.1, 1])
-sims_per_prob =  1#400
+sims_per_prob =  10
 nsteps = 1000
 
 
@@ -41,13 +41,10 @@ for j_prob, rewire_prob in enumerate(rewire_probs):
 
     # Calculate and store mean
     meanstates[j_prob] = meanstates_sum/sims_per_prob
-    interfacedens[j_edges] = interfacedens_sum/sims_per_prob
+    interfacedens[j_prob] = interfacedens_sum/sims_per_prob
 
 
 # Save data
-data = np.hstack((rewire_probs[np.newaxis].T, meanstates_WS))
-np.savetxt("WS_p.dat", data)
-
 data_meanstate = np.hstack((rewire_probs[np.newaxis].T, meanstates))
 np.savetxt("WS_meanstates.dat", data_meanstate)
 
